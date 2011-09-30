@@ -1,0 +1,15 @@
+To get started, I assume you are using Git, Eclipse and Maven.
+
+1) Clone the repository
+
+2) Create Eclipse Projects
+
+mvn eclipse:eclipse
+
+3) As a sanity check, run from command line
+
+mvn jetty:run
+
+4) Import project into Eclipse
+
+5) Run src/test/java/net/kingsbery/Start.java

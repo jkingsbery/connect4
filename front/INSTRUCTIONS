@@ -1,0 +1,35 @@
+> The AIs are communicated with through a very simple web call, it will
+> POST to the URL specified with the following data, Content-Type will be
+> "application/json":
+>
+> {"rows":6,"cols":7,"board":[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]],"currentTurn":1,"moveNumber":0}
+>
+> rows - number of rows on the board
+> cols - number of columns on the board
+> board - 2d array containing the current board state, in [col][row]
+> order. That is each inner array contains one column of the board.
+> currentTurn - the player number of the current turn (1 or 2, until we
+> implement 3 player...)
+> moveNumber - incrementing count of how many turns have occurred
+>
+> As play continues your AI will continue getting these requests, you are
+> free to keep whatever state you want but there is enough info in the
+> request to make a move without any prior knowledge.
+>
+> Here's an example of a request for a move further into the game:
+>
+> {"rows":6,"cols":7,"board":[[0,0,0,1,2,2],[0,0,0,0,0,1],[0,0,0,0,0,0],[0,0,0,0,0,1],[0,0,0,0,0,2],[0,0,0,0,1,1],[0,0,0,0,0,2]],"lastMove":{"row":3,"col":0,"player":1,"moves":9},"currentTurn":2,"moveNumber":9}
+>
+> This has one piece of data, lastMove. It tells you what was the most
+> recent event to occur, in this case, player 1 moved in col 0, which
+> happened to fill row 3 of that column.
+>
+> You will only get requests when it is your turn, so you shouldn't need
+> to do any checking of whose turn it is.
+>
+>
+> RESPONSES:
+> The body of the response to this request should be a simple json object,
+> the Content-Type here should also be "application/json":
+>
+> {"move":0}
