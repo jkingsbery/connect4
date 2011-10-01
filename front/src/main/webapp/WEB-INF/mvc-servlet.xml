@@ -27,15 +27,12 @@
   <bean
     class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
     <property name="messageConverters">
-      <util:list id="beanList">
-        <ref bean="moveMarshaller" />
-      </util:list>
-    </property
+      <list>
+        <bean class="net.kingsbery.connect4.front.MoveMarshaller" />
+        <bean class="net.kingsbery.connect4.front.MoveResponseMarshaller" />
+      </list>
+    </property>
 
   </bean>
-
-  <bean id="moveMarshaller"
-    class="net.kingsbery.connect4.front.MoveMarshaller" />
-
 
 </beans>

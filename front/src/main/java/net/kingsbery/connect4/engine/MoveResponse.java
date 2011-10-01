@@ -2,8 +2,16 @@ package net.kingsbery.connect4.engine;
 
 public class MoveResponse {
 
-    public MoveResponse(int nextMove) {
-        //TODO
+    
+    
+    private int move;
+
+    public MoveResponse(int column) {
+        this.move=column;
+    }
+    
+    public int getMove(){
+        return move;
     }
 
 }
