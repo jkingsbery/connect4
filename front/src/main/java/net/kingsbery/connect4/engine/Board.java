@@ -6,11 +6,9 @@ import java.util.List;
 public class Board {
 
     public Board(int columns, int rows) {
-        this.columns = columns;
-        this.rows = rows;
-        board = new int[columns][rows];
+        this(columns,rows,new int[columns][rows]);
     }
-
+    
     protected Board(Board board) {
         this.columns = board.columns;
         this.rows = board.rows;
@@ -20,6 +18,12 @@ public class Board {
                 this.board[i][j] = board.board[i][j];
             }
         }
+    }
+
+    public Board(int columns, int rows, int[][] chips) {
+        this.columns = columns;
+        this.rows = rows;
+        board = chips;
     }
 
     int rows;
@@ -107,5 +111,22 @@ public class Board {
 
     public boolean stillPlaying() {
         return !(isWin() || getLegalMoves().isEmpty());
+    }
+
+    public int getRows() {
+        return this.rows;
+    }
+    
+    public int getColumns(){
+        return this.columns;
+    }
+
+    public int getHeight(int column) {
+        for(int row=0; row<this.rows; row++){
+            if(board[column][row]==0){
+                return row;
+            }
+        }
+        return this.rows;
     }
 }

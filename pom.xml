@@ -8,7 +8,6 @@
   <packaging>pom</packaging>
   <modules>
     <module>front</module>
-    <module>front</module>
   </modules>
 
 </project>

@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  
+
   <groupId>net.kingsbery.connect4</groupId>
   <artifactId>front</artifactId>
   <version>1.0</version>
@@ -18,12 +19,9 @@
     <org.springframework.version>3.0.5.RELEASE</org.springframework.version>
   </properties>
   <dependencies>
-    <!--<dependency>
-      <groupId>net.kingsbery.connect4</groupId>
-      <artifactId>backend</artifactId>
-      <version>${project.version}</version>
-    </dependency>-->
-  
+    <!--<dependency> <groupId>net.kingsbery.connect4</groupId> <artifactId>backend</artifactId> 
+      <version>${project.version}</version> </dependency> -->
+
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
@@ -38,6 +36,12 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.9.0-rc1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -180,10 +184,11 @@
       <version>${org.springframework.version}</version>
       <scope>test</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
-      <artifactId>jackson-core-lgpl</artifactId>
+      <!-- <artifactId>jackson-core-lgpl</artifactId> -->
+      <artifactId>jackson-mapper-asl</artifactId>
       <version>1.8.5</version>
     </dependency>
 
@@ -197,8 +202,8 @@
       <artifactId>commons-dbcp</artifactId>
       <version>1.4</version>
     </dependency>
-    
-    
+
+
   </dependencies>
   <build>
     <resources>

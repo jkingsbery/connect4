@@ -14,7 +14,7 @@
 
    <servlet-mapping>
         <servlet-name>mvc</servlet-name>
-        <url-pattern>/front</url-pattern>
+        <url-pattern>/front/*</url-pattern>
     </servlet-mapping>
    
 

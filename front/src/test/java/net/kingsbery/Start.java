@@ -33,13 +33,6 @@ public class Start {
 		try {
 			System.out.println(">>> STARTING EMBEDDED JETTY SERVER, PRESS ANY KEY TO STOP");
 			server.start();
-			System.in.read();
-			System.out.println(">>> STOPPING EMBEDDED JETTY SERVER"); 
-            // while (System.in.available() == 0) {
-			//   Thread.sleep(5000);
-			// }
-			server.stop();
-			server.join();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(100);

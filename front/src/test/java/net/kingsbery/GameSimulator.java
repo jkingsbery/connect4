@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.kingsbery.connect4.engine.Board;
 import net.kingsbery.connect4.engine.ConnectFourAgent;
+import net.kingsbery.connect4.engine.MoveRequest;
 import net.kingsbery.connect4.engine.impl.RandomAgent;
 
 public class GameSimulator {
@@ -20,7 +21,7 @@ public class GameSimulator {
         while(board.stillPlaying()){
             int currentPlayer=moveNumber%2;
             int turnNumber=moveNumber/2;
-            int move = player[currentPlayer].getNextMove(board, moveNumber, currentPlayer+1, null);
+            int move = player[currentPlayer].getNextMove(new MoveRequest(board, turnNumber, currentPlayer+1, null));
             moves.add(move);
             board = board.move(move, currentPlayer+1);
             moveNumber++;
