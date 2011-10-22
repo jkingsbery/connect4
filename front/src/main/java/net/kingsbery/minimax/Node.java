@@ -16,6 +16,8 @@ public class Node<T> {
 
     private ChildGenerator<T> childGenerator;
 
+    int move;
+    
     @Deprecated
     public Node(){
         
@@ -33,6 +35,11 @@ public class Node<T> {
     public Node(T underlying, ChildGenerator<T> childGenerator) {
         this.setUnderlying(underlying);
         this.childGenerator=childGenerator;
+    }
+
+    public Node(T underlying, int move, ChildGenerator<T> childGenerator) {
+        this(underlying,childGenerator);
+        this.move=move;
     }
 
     public Node<T> addLeaf(T t) {
@@ -80,10 +87,18 @@ public class Node<T> {
     public void generateChildren() {
         assert this.childGenerator!=null;
         if(children.isEmpty()){
-            List<T> underlyingChildren = this.childGenerator.getChildren(this.underlying);
-            for(T x: underlyingChildren){
-                this.children.add(new Node<T>(x,childGenerator));
+            List<Integer> moves = this.childGenerator.getMoves(this.underlying);
+            for(int move : moves){
+                this.children.add( new Node<T>(childGenerator.getChild(this.underlying,move),move,childGenerator));
             }
+//            List<T> underlyingChildren = this.childGenerator.getChildren(this.underlying);
+//            for(T x: underlyingChildren){
+//                this.children.add(new Node<T>(x,childGenerator));
+//            }
         }
+    }
+
+    public int getMove() {
+        return move;
     }
 }

@@ -68,5 +68,4 @@ public class MiniMaxTest {
         
         assertEquals(-7,algo.minimax(head));
     }
-    
 }
