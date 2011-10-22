@@ -13,8 +13,8 @@ import org.junit.Test;
 public class ChildGenerationTest {
 
     public static class TestChildGenerator extends AbstractChildGenerator<String> {
-        @Override
-        public List<String> getChildren(String head) {
+
+        protected List<String> getChildren(String head) {
             if ("ABCD".contains(head)) {
                 return Collections.emptyList();
             } else if ("X".equals(head)) {
@@ -30,13 +30,18 @@ public class ChildGenerationTest {
 
         @Override
         public List<Integer> getMoves(String head) {
-            if ("ABCD".contains(head)) {
+            if (isChild(head)) {
                 return Collections.emptyList();
             } else if ("XYZ".contains(head)) {
                 return Arrays.asList(0,1);
             } else {
                 throw new RuntimeException("Cannot evaluate game state " + head);
             }
+        }
+
+        @Override
+        public boolean isChild(String x) {
+            return "ABCD".contains(x);
         }
     }
 
@@ -67,17 +72,13 @@ public class ChildGenerationTest {
                 throw new RuntimeException("Cannot evaluate game state " + head);
             }
         }
+        
+        @Override
+        public boolean isChild(String x) {
+            return "ABCD".contains(x);
+        }
+        
     }
-
-    @Test
-    public void foo() {
-        MinimaxAlgorithm<String> algo = new MinimaxAlgorithmImpl<String>(2,
-                new TestHeuristic());
-        Node<String> head = new Node<String>("Z", new TestChildGenerator());
-        algo.minimax(head);
-        assertEquals(-7, algo.minimax(head));
-    }
-
 
     @Test
     public void rightMove() {

@@ -10,8 +10,8 @@ import java.util.List;
  */
 public interface ChildGenerator<T> {
 
-    List<T> getChildren(T head);
-
+    boolean isChild(T x);
+    
     List<Integer> getMoves(T head);
     
     T getChild(T underlying, int move);

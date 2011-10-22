@@ -62,5 +62,14 @@ public class BoardTest {
         System.out.println(board);
         assertTrue(board.isWin());
     }
+    
+    @Test
+    public void player1Starts(){
+        assertEquals(1,new Board(7,6).getCurrent());
+    }
 
+    @Test
+    public void player2Next(){
+        assertEquals(2,new Board(7,6).move(0).getCurrent());
+    }
 }

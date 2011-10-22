@@ -48,8 +48,18 @@ public class Board {
         return result;
     }
 
+    /**
+     * An implicit version of move that uses the number of deployed pieces
+     * to figure out who the player is.
+     * @param column
+     * @return
+     */
+    public Board move(int column){
+        return move(column,getCurrent());
+    }
+    
     public Board move(int column, int player) {
-        assert !this.isWin() : "Game is already over!";
+        assert this.stillPlaying() : "Game is already over!";
         Board result = new Board(this);
         int openRow = 0;
         while (result.board[column][openRow] != 0)
@@ -156,7 +166,7 @@ public class Board {
                 if(board[col][row]!=0) count++;
             }
         }
-        return count%2==0 ? 2 : 1;
+        return count%2==0 ? 1 : 2;
     }
     
     @Override

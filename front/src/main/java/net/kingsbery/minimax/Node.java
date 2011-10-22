@@ -49,7 +49,7 @@ public class Node<T> {
     }
 
     public boolean isLeaf() {
-        return children.isEmpty();
+        return childGenerator==null ? children.isEmpty() : childGenerator.isChild(underlying);
     }
 
     public List<Node<T>> getChildren() {
@@ -85,7 +85,8 @@ public class Node<T> {
     }
 
     public void generateChildren() {
-        if(this.childGenerator!=null && children.isEmpty()){
+        
+        if(this.childGenerator!=null && !this.childGenerator.isChild(this.underlying) && children.isEmpty()){
             List<Integer> moves = this.childGenerator.getMoves(this.underlying);
             for(int move : moves){
                 this.children.add( new Node<T>(childGenerator.getChild(this.underlying,move),move,childGenerator));

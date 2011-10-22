@@ -51,21 +51,4 @@ public class MiniMaxTest {
         algo.minimax(head);
         assertEquals(right,head.getChoice());
     }
-    
-    @Test
-    public void twoLevelsShouldPickBetter(){
-        MinimaxAlgorithm<String> algo = new MinimaxAlgorithmImpl<String>(2,new TestHeuristic());
-        Node<String> left = new Node<String>("X");
-        left.addLeaf("A");
-        left.addLeaf("B");
-        Node<String> right = new Node<String>("Y");
-        right.addLeaf("C");
-        right.addLeaf("D");
-
-        Node<String> head = new Node<String>("Z");
-        head.addNode(left);
-        head.addNode(right);
-        
-        assertEquals(-7,algo.minimax(head));
-    }
 }

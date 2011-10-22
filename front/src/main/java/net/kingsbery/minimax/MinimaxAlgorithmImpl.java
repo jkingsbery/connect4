@@ -1,7 +1,12 @@
 package net.kingsbery.minimax;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class MinimaxAlgorithmImpl<T> implements MinimaxAlgorithm<T> {
 
+    private static final Log log = LogFactory.getLog(MinimaxAlgorithmImpl.class);
+    
     private int maxDepth;
     private Heuristic<T> heuristic;
 
@@ -26,6 +31,7 @@ public class MinimaxAlgorithmImpl<T> implements MinimaxAlgorithm<T> {
                 for (Object x : head.children) {
                     Node child = (Node)x;
                     int score = minimax(child, depth + 1);
+                    log.info(tabs(depth) + "Score for move " + child.getMove() + ": " + score);
                     if (score > alpha) {
                         head.setChoice(child);
                         alpha = score;
@@ -36,7 +42,8 @@ public class MinimaxAlgorithmImpl<T> implements MinimaxAlgorithm<T> {
                 int alpha = Integer.MAX_VALUE;
                 for (Object x : head.children) {
                     Node child = (Node)x;
-                    int score = minimax(child, depth + 1);
+                    int score = -1*minimax(child, depth + 1);
+                    log.info(tabs(depth) + "Score for move " + child.getMove() + ": " + score);
                     if (score < alpha) {
                         head.setChoice(child);
                         alpha = score;
@@ -47,6 +54,14 @@ public class MinimaxAlgorithmImpl<T> implements MinimaxAlgorithm<T> {
                 throw new AssertionError("depth must be even or odd but was " + depth);
             }
         }
+    }
+
+    private String tabs(int depth) {
+        String result = "";
+        for(int i=0; i<depth; i++){
+            result+="\t";
+        }
+        return result;
     }
 
 
