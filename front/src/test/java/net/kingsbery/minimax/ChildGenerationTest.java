@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class ChildGenerationTest {
 
-    public static class TestChildGenerator implements ChildGenerator<String> {
+    public static class TestChildGenerator extends AbstractChildGenerator<String> {
         @Override
         public List<String> getChildren(String head) {
             if ("ABCD".contains(head)) {
@@ -38,15 +38,10 @@ public class ChildGenerationTest {
                 throw new RuntimeException("Cannot evaluate game state " + head);
             }
         }
-
-        @Override
-        public String getChild(String underlying, int move) {
-            return this.getChildren(underlying).get(move);
-        }
     }
 
-    public static class TestSwitchChildGenerator implements
-            ChildGenerator<String> {
+    public static class TestSwitchChildGenerator extends
+            AbstractChildGenerator<String> {
         @Override
         public List<String> getChildren(String head) {
             if ("ABCD".contains(head)) {
@@ -72,11 +67,6 @@ public class ChildGenerationTest {
                 throw new RuntimeException("Cannot evaluate game state " + head);
             }
         }
-
-        @Override
-        public String getChild(String underlying, int move) {
-            return this.getChildren(underlying).get(move);
-        }    
     }
 
     @Test

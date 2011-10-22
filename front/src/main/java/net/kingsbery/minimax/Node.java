@@ -85,16 +85,11 @@ public class Node<T> {
     }
 
     public void generateChildren() {
-        assert this.childGenerator!=null;
-        if(children.isEmpty()){
+        if(this.childGenerator!=null && children.isEmpty()){
             List<Integer> moves = this.childGenerator.getMoves(this.underlying);
             for(int move : moves){
                 this.children.add( new Node<T>(childGenerator.getChild(this.underlying,move),move,childGenerator));
             }
-//            List<T> underlyingChildren = this.childGenerator.getChildren(this.underlying);
-//            for(T x: underlyingChildren){
-//                this.children.add(new Node<T>(x,childGenerator));
-//            }
         }
     }
 
