@@ -1,7 +1,11 @@
 package net.kingsbery.connect4.engine;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class Board {
 
@@ -128,5 +132,48 @@ public class Board {
             }
         }
         return this.rows;
+    }
+
+    public Map<Integer,Board> getNextBoards(int player) {
+        this.getLegalMoves();
+        Map<Integer,Board> result =new HashMap<Integer,Board>();
+        for(Integer x :this.getLegalMoves()){
+            result.put(x, this.move(x, player));
+        }
+        return result;
+    }
+
+    public int randomMove(Random random) {
+        List<Integer> legalMoves = getLegalMoves();
+        Collections.shuffle(legalMoves,random);
+        return legalMoves.get(0);        
+    }
+
+    public int getCurrent() {
+        int count=0;
+        for(int col =0 ; col<this.columns; col++){
+            for(int row=0; row<this.rows; row++){
+                if(board[col][row]!=0) count++;
+            }
+        }
+        return count%2==0 ? 2 : 1;
+    }
+    
+    @Override
+    public boolean equals(Object x){
+        if(!(x instanceof Board)) return false;
+        else{
+            Board other = (Board) x;
+            if(other.columns!=this.columns || other.rows!=this.rows){
+                return false;
+            }else{
+                for(int col = 0; col < this.columns; col++){
+                    for(int row =0 ; row < this.rows; row++){
+                        if(this.board[col][row]!=other.board[col][row])return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

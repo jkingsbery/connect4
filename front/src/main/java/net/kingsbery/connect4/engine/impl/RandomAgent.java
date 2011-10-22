@@ -18,9 +18,7 @@ public class RandomAgent implements ConnectFourAgent {
     
     @Override
     public int getNextMove(MoveRequest request) {
-        List<Integer> legalMoves = request.getBoard().getLegalMoves();
-        Collections.shuffle(legalMoves,random);
-        return legalMoves.get(0);
+        return request.getBoard().randomMove(random);
     }
 
 }
