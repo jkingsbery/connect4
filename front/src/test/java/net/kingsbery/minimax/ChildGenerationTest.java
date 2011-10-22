@@ -76,7 +76,8 @@ public class ChildGenerationTest {
         @Override
         public String getChild(String underlying, int move) {
             return this.getChildren(underlying).get(move);
-        }    }
+        }    
+    }
 
     @Test
     public void foo() {
