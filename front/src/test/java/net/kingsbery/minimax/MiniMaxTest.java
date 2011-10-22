@@ -8,7 +8,7 @@ import org.junit.Test;
 public class MiniMaxTest {
 
 
-    private static class TestHeuristic implements Heuristic<String>{
+    public static class TestHeuristic implements Heuristic<String>{
         
         @Override
         public int eval(String underlying) {

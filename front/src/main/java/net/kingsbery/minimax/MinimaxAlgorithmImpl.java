@@ -16,6 +16,7 @@ public class MinimaxAlgorithmImpl<T> implements MinimaxAlgorithm<T> {
     }
 
     protected int minimax(Node<T> head, int depth) {
+        head.generateChildren();
         if (head.isLeaf() || depth >= maxDepth) {
             return heuristic.eval(head.getUnderlying());
         } else {
