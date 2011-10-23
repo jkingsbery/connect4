@@ -19,16 +19,30 @@ import org.springframework.stereotype.Component;
 @Component
 public class MinMaxAgent implements ConnectFourAgent {
 
-    Random random = new Random();
+    private int depth;
 
     private static final Log log = LogFactory.getLog(MinMaxAgent.class);
+
+    private Heuristic<Board> heuristic;
+    
+    public MinMaxAgent(int depth){
+        this.depth=depth;
+        heuristic = new DefaultConnectFourHeuristic();
+    }
+    
+    public MinMaxAgent(int depth, Heuristic<Board> heuristic){
+        this.depth=depth;
+        this.heuristic=heuristic;
+    }
     
     @Override
     public int getNextMove(MoveRequest request) {
         Node<Board> head = new Node<Board>(request.getBoard(), new ConnectFourChildGenerator());
-        MinimaxAlgorithm<Board> algo = new MinimaxAlgorithmImpl<Board>(2, new ConnectFourHeuristic());
+        MinimaxAlgorithm<Board> algo = new MinimaxAlgorithmImpl<Board>(depth, heuristic);
         int moveScore = algo.minimax(head);
-        log.info("Move score: " + moveScore);
+        log.debug("Move score: " + moveScore);
+        assert head!=null;
+        assert head.getChoice()!=null;
         return head.getChoice().getMove();
     }
     
@@ -53,14 +67,17 @@ public class MinMaxAgent implements ConnectFourAgent {
 
     }
 
-    public static class ConnectFourHeuristic implements Heuristic<Board>{
+    public static class DefaultConnectFourHeuristic implements Heuristic<Board>{
 
+        
+        Random random = new Random();
+        
         @Override
         public int eval(Board t) {
             if(t.isWin()){
                 return 10000;
             }else{
-                return 0;
+                return random.nextInt(1000);
             }
         }
         

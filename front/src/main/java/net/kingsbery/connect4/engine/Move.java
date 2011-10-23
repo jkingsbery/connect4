@@ -30,4 +30,8 @@ public class Move {
         return moves;
     }
 
+    public String toString(){
+        return Integer.toString(column);
+    }
+    
 }

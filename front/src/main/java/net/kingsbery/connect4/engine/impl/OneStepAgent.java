@@ -7,6 +7,9 @@ import net.kingsbery.connect4.engine.Board;
 import net.kingsbery.connect4.engine.ConnectFourAgent;
 import net.kingsbery.connect4.engine.MoveRequest;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class OneStepAgent implements ConnectFourAgent{
     Random random = new Random();
 

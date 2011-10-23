@@ -16,7 +16,7 @@ public class MinMaxAgentTest {
         
         MoveRequest request = new MoveRequest(board,3,2,new Move(0,3,1,3));
         System.out.println(board);
-        assertEquals(3,new MinMaxAgent().getNextMove(request));
+        assertEquals(3,new MinMaxAgent(2).getNextMove(request));
     }
     
     @Test
@@ -26,6 +26,6 @@ public class MinMaxAgentTest {
         
         MoveRequest request = new MoveRequest(board,3,1,new Move(0,3,1,3));
         System.out.println(board);
-        assertEquals(3,new MinMaxAgent().getNextMove(request));
+        assertEquals(3,new MinMaxAgent(2).getNextMove(request));
     }
 }

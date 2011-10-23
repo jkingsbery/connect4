@@ -30,6 +30,14 @@ public class Board {
         board = chips;
     }
 
+    public static Board play(int columns, int rows, String string) {
+        Board result = new Board(columns,rows);
+        for(int i=0; i<string.length(); i++){
+            result=result.move(Integer.parseInt(string.substring(i,i+1)));
+        }
+        return result;
+    }
+
     int rows;
     int columns;
     /**
@@ -60,6 +68,8 @@ public class Board {
     
     public Board move(int column, int player) {
         assert this.stillPlaying() : "Game is already over!";
+        assert column<this.getColumns() : "The game doesn't have that many columns...";
+        assert this.getHeight(column)<this.getRows() : "Cannot play another piece in column "+column;
         Board result = new Board(this);
         int openRow = 0;
         while (result.board[column][openRow] != 0)
@@ -116,7 +126,7 @@ public class Board {
         }
         return false;
     }
-
+    
     private boolean samePlayers(int col, int row, int col2, int row2) {
         return col<this.columns && col2<this.columns && row >= 0 && row2 >= 0 && col>=0 && col2>=0 && board[col][row] != 0
                 && board[col2][row2] != 0
@@ -186,4 +196,14 @@ public class Board {
         }
         return true;
     }
+
+    public int size() {
+        int sum=0;
+        for(int i=0; i<this.getColumns(); i++){
+            sum+=this.getHeight(i);
+        }
+        return sum;
+    }
+    
+    
 }

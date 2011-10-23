@@ -31,24 +31,26 @@ public class MinimaxAlgorithmImpl<T> implements MinimaxAlgorithm<T> {
                 for (Object x : head.children) {
                     Node child = (Node)x;
                     int score = minimax(child, depth + 1);
-                    log.info(tabs(depth) + "Score for move " + child.getMove() + ": " + score);
+                    log.debug(tabs(depth) + "Score for move " + child.getMove() + ": " + score);
                     if (score > alpha) {
                         head.setChoice(child);
                         alpha = score;
                     }
                 }
+                assert head.getChoice()!=null;
                 return alpha;
             } else if (depth % 2 == 1) {
                 int alpha = Integer.MAX_VALUE;
                 for (Object x : head.children) {
                     Node child = (Node)x;
                     int score = -1*minimax(child, depth + 1);
-                    log.info(tabs(depth) + "Score for move " + child.getMove() + ": " + score);
+                    log.debug(tabs(depth) + "Score for move " + child.getMove() + ": " + score);
                     if (score < alpha) {
                         head.setChoice(child);
                         alpha = score;
                     }
                 }
+                assert head.getChoice()!=null;
                 return alpha;
             }else{
                 throw new AssertionError("depth must be even or odd but was " + depth);
