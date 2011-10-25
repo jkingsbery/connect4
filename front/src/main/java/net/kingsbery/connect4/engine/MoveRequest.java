@@ -10,7 +10,7 @@ public class MoveRequest {
     public MoveRequest(Board board, int moveNumber, int player, Move lastMove) {
         this.board = board;
         this.moveNumber = moveNumber;
-        this.playerToMove = player;
+        this.playerToMove = board.getCurrent();
         this.lastMove = lastMove;
     }
 

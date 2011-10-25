@@ -21,17 +21,17 @@ public class HistoryAgent implements ConnectFourAgent{
     private static final Log log = LogFactory.getLog(HistoryAgent.class);
     
     final List<Integer> moves = new ArrayList<Integer>();
+    public String getPrefix(){
+        String prefix="";
+        for(int x:moves){
+            prefix+=x;
+        }
+        return prefix;
+    }
     ConnectFourAgent base = new MinMaxAgent(4,new Heuristic<Board>(){
 
         Heuristic<Board> baseHeuristic = new MinMaxAgent.DefaultConnectFourHeuristic(); 
         
-        public String getPrefix(){
-            String prefix="";
-            for(int x:moves){
-                prefix+=x;
-            }
-            return prefix;
-        }
         
         @Override
         public int eval(Board t) {
@@ -69,14 +69,7 @@ public class HistoryAgent implements ConnectFourAgent{
         }});
     @Override
     public int getNextMove(MoveRequest request) {
-        if(request.getBoard().size()<=1 && !moves.isEmpty()){
-            //new game, we lost the last one
-            log.info("LOST: " + moves);
-            moves.clear();
-        }
-        if(request.getLastMove()!=null){
-            moves.add(request.getLastMove().getColumn());
-        }
+        recordMove(request);
         
         int result = base.getNextMove(request);
         moves.add(result);
@@ -86,6 +79,17 @@ public class HistoryAgent implements ConnectFourAgent{
             moves.clear();
         }
         return result;
+    }
+    
+    protected void recordMove(MoveRequest request) {
+        if(request.getBoard().size()<=1 && !moves.isEmpty()){
+            //new game, we lost the last one
+            log.info("LOST: " + moves);
+            moves.clear();
+        }
+        if(request.getLastMove()!=null){
+            moves.add(request.getLastMove().getColumn());
+        }
     }
 
 }
