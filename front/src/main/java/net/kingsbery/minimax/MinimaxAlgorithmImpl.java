@@ -23,14 +23,23 @@ public class MinimaxAlgorithmImpl<T> implements MinimaxAlgorithm<T> {
     protected int minimax(Node<T> head, int depth) {
         head.generateChildren();
         if (head.isLeaf() || depth >= maxDepth) {
-            return heuristic.eval(head.getUnderlying());
+            int baseScore = heuristic.eval(head.getUnderlying());
+            if(depth%2==0){
+                baseScore*=-1;
+            }
+            return baseScore;
         } else {
+            //TODO reduce duplication here
             if (depth % 2 == 0) {
                 int alpha = Integer.MIN_VALUE;
                 
                 for (Object x : head.children) {
+                    if(alpha==heuristic.getMax()){
+                        break;
+                    }
                     Node child = (Node)x;
                     int score = minimax(child, depth + 1);
+                    child.setValue(score);
                     log.debug(tabs(depth) + "Score for move " + child.getMove() + ": " + score);
                     if (score > alpha) {
                         head.setChoice(child);
@@ -42,8 +51,12 @@ public class MinimaxAlgorithmImpl<T> implements MinimaxAlgorithm<T> {
             } else if (depth % 2 == 1) {
                 int alpha = Integer.MAX_VALUE;
                 for (Object x : head.children) {
+                    if(alpha==-1*heuristic.getMax()){
+                        break;
+                    }
                     Node child = (Node)x;
-                    int score = -1*minimax(child, depth + 1);
+                    int score =minimax(child, depth + 1);
+                    child.setValue(score);
                     log.debug(tabs(depth) + "Score for move " + child.getMove() + ": " + score);
                     if (score < alpha) {
                         head.setChoice(child);

@@ -80,6 +80,13 @@ public class MinMaxAgent implements ConnectFourAgent {
                 return random.nextInt(1000);
             }
         }
+
+        @Override
+        public int getMax() {
+            return 10000;
+        }
+        
+        
         
     }    
 }

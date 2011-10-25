@@ -24,6 +24,11 @@ public class MiniMaxTest {
                 throw new AssertionError("This heuristic cannot evaluate " + underlying);
             }
         }
+
+        @Override
+        public int getMax() {
+            return 10;
+        }
         
     }
     

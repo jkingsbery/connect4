@@ -12,4 +12,9 @@ public class LearningHeuristic implements Heuristic<Board> {
         return base.eval(t);
     }
 
+    @Override
+    public int getMax() {
+        return base.getMax();
+    }
+
 }

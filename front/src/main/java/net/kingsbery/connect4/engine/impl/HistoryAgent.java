@@ -54,6 +54,11 @@ public class HistoryAgent implements ConnectFourAgent{
                     return random.nextInt();
                 }
             }
+        }
+
+        @Override
+        public int getMax() {
+            return 10000;
         }});
     @Override
     public int getNextMove(MoveRequest request) {
