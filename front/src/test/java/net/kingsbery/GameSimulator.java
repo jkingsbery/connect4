@@ -29,7 +29,7 @@ public class GameSimulator {
         player[0] = new MinMaxAgent(4);
         player[1] = new HistoryAgent();
         int results[] = new int[3];
-        int games=1000;
+        int games=20;
         for (int i = 0; i < games; i++) {
             int game = game(goFirst(player,i));
             results[inverse(game,i)]++;

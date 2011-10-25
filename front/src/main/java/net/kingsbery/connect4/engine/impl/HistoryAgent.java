@@ -23,6 +23,8 @@ public class HistoryAgent implements ConnectFourAgent{
     final List<Integer> moves = new ArrayList<Integer>();
     ConnectFourAgent base = new MinMaxAgent(4,new Heuristic<Board>(){
 
+        Heuristic<Board> baseHeuristic = new MinMaxAgent.DefaultConnectFourHeuristic(); 
+        
         public String getPrefix(){
             String prefix="";
             for(int x:moves){
@@ -44,10 +46,15 @@ public class HistoryAgent implements ConnectFourAgent{
                     int losses=0;
                     BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("games2.txt")));
                     String line;
+                    int current = t.getCurrent();
+                    int other = t.getOtherPlayer();
                     while((line=reader.readLine())!=null){
-                        //TODO: get correct player
-                        if(line.startsWith("1:"+prefix)) wins++;
-                        if(line.startsWith("2:"+prefix)) losses++;
+                        
+                        if(line.startsWith(current+":"+prefix)) wins++;
+                        if(line.startsWith(other+":"+prefix)) losses++;
+                    }
+                    if(wins+losses==0){
+                        return baseHeuristic.eval(t);
                     }
                     return 5000*wins/(wins+losses);
                 } catch (IOException e) {

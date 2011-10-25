@@ -179,6 +179,8 @@ public class Board {
         return count%2==0 ? 1 : 2;
     }
     
+    
+    
     @Override
     public boolean equals(Object x){
         if(!(x instanceof Board)) return false;
@@ -203,6 +205,10 @@ public class Board {
             sum+=this.getHeight(i);
         }
         return sum;
+    }
+
+    public int getOtherPlayer() {
+        return this.getCurrent()%2==0?2:1;
     }
     
     
