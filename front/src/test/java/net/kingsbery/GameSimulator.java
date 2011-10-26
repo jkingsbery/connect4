@@ -10,6 +10,7 @@ import net.kingsbery.connect4.engine.Board;
 import net.kingsbery.connect4.engine.ConnectFourAgent;
 import net.kingsbery.connect4.engine.Move;
 import net.kingsbery.connect4.engine.MoveRequest;
+import net.kingsbery.connect4.engine.impl.DynamicDepthMinMaxAgent;
 import net.kingsbery.connect4.engine.impl.MinMaxAgent;
 import net.kingsbery.connect4.engine.impl.OpeningAgent;
 
@@ -26,10 +27,10 @@ public class GameSimulator {
         results = new BufferedWriter(new FileWriter("games.txt",true));
         long start = System.currentTimeMillis();
         ConnectFourAgent player[] = new ConnectFourAgent[2];
-        player[0] = new MinMaxAgent(5);
+        player[0] = new DynamicDepthMinMaxAgent();
         player[1] = new MinMaxAgent(4);
         int results[] = new int[3];
-        int games=20;
+        int games=100;
         for (int i = 0; i < games; i++) {
             System.out.println("Game #" + i);
             int game = game(goFirst(player,i));
