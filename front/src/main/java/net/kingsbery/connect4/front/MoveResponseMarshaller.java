@@ -51,7 +51,7 @@ public class MoveResponseMarshaller implements HttpMessageConverter<MoveResponse
             HttpMessageNotWritableException {
         ObjectMapper mapper = new ObjectMapper();
         outputMessage.getHeaders().setContentType(MediaType.APPLICATION_JSON);
-        outputMessage.getBody().write("{\"move\":2}".getBytes());
+        outputMessage.getBody().write(("{\"move\":" +t.getMove()+"}").getBytes());
 //        mapper.writeValue(outputMessage.getBody(), t);
     }
 

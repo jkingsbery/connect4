@@ -14,9 +14,7 @@ import net.kingsbery.minimax.Node;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Component;
 
-@Component
 public class MinMaxAgent implements ConnectFourAgent {
 
     private int depth;
@@ -70,7 +68,7 @@ public class MinMaxAgent implements ConnectFourAgent {
     public static class DefaultConnectFourHeuristic implements Heuristic<Board>{
 
         
-        Random random = new Random();
+        static Random random = new Random();
         
         @Override
         public int eval(Board t) {

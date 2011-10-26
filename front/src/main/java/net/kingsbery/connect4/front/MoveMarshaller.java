@@ -54,11 +54,13 @@ public class MoveMarshaller implements HttpMessageConverter<MoveRequest> {
         Map<String, Object> lastMove = (Map<String, Object>) result
                 .get("lastMove");
         return new MoveRequest(board, (Integer) result.get("moveNumber"),
-                (Integer) result.get("currentTurn"), new Move(
+                (Integer) result.get("currentTurn"), null); 
+        /*new Move(
                         (Integer) lastMove.get("row"),
                         (Integer) lastMove.get("col"),
                         (Integer) lastMove.get("player"),
                         (Integer) lastMove.get("moves")));
+                        */
     }
 
     @Override

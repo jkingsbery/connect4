@@ -32,18 +32,13 @@ public class OpeningAgent implements ConnectFourAgent {
         //White Moves
         if (board.size()==0 && board.getHeight(3) == 0 ) {
             return 3;
-        }else if(getPrefix().startsWith("332")&& board.size()==4 && board.getHeight(1)==0 && board.getHeight(4)==0){
+        }else if(getPrefix().equals("3321") ){
             return 4;
-        }else if(getPrefix().startsWith("334")&& board.size()==4 && board.getHeight(1)==0 && board.getHeight(4)==0){
-            return 2;
+        }else if(getPrefix().equals("3324")){
+            return 1;
         }
-        
-        else if(board.size()==2 && board.getHeight(3)==1){
-            if(board.getHeight(1)==1){
-                return 5;
-            }else if(board.getHeight(5)==1){
-                return 1;
-            }
+        else if(getPrefix().equals("3340")){
+            return 2;
         }
         //Black Moves
         //Past Opening

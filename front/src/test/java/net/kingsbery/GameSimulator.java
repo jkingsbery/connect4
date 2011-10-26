@@ -27,8 +27,8 @@ public class GameSimulator {
         results = new BufferedWriter(new FileWriter("games.txt",true));
         long start = System.currentTimeMillis();
         ConnectFourAgent player[] = new ConnectFourAgent[2];
-        player[0] = new DynamicDepthMinMaxAgent();
-        player[1] = new MinMaxAgent(4);
+        player[1] = new OpeningAgent(new DynamicDepthMinMaxAgent());
+        player[0] = new MinMaxAgent(4);
         int results[] = new int[3];
         int games=100;
         for (int i = 0; i < games; i++) {
@@ -86,7 +86,7 @@ public class GameSimulator {
             results.flush();
             return winner;
         } else {
-            log.info(0 + ": " + moves);
+            results.write(0 + ": " + moves);
             return 0;
         }
     }

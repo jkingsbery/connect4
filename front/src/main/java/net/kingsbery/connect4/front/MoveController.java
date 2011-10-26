@@ -37,7 +37,7 @@ public class MoveController {
     public @ResponseBody MoveResponse handle(@RequestBody MoveRequest request,@PathVariable String mover){
         System.out.println(request.getBoard());
         MoveResponse moveResponse = new MoveResponse(this.movers.get(mover).getNextMove(request));
-        log.info(moveResponse);
+        log.info(moveResponse.getMove());
         return moveResponse;
     }
     

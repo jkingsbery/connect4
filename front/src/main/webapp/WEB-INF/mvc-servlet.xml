@@ -32,7 +32,16 @@
         <bean class="net.kingsbery.connect4.front.MoveResponseMarshaller" />
       </list>
     </property>
+  </bean>
 
+  <bean class="net.kingsbery.connect4.engine.impl.OpeningAgent">
+    <constructor-arg>
+      <bean class="net.kingsbery.connect4.engine.impl.MinMaxAgent">
+        <constructor-arg>
+          <value>4</value>
+        </constructor-arg>
+      </bean>
+    </constructor-arg>
   </bean>
 
 </beans>
